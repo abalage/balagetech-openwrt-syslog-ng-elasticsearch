@@ -18,6 +18,7 @@ Further information could be found in the website referred in repo details.
 ├── elastic
 │   └── elastic-mapping-for-openwrt.txt     <- data type mappings for indexes
 └── etc
+    ├── ulogd.conf                          <- ulogd configuration for OpenWRT 18.06.x
     ├── apparmor.d
     │   └── local
     │       └── sbin.syslog-ng              <- workaround for GitHub issue https://github.com/balabit/syslog-ng/issues/2625
