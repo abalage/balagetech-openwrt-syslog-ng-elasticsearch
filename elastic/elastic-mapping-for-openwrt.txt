@@ -1,5 +1,9 @@
-PUT /network
+PUT _template/network_openwrt
 {
+  "index_patterns": ["network-*"],
+  "settings": {
+    "number_of_shards": 1
+  },
    "mappings" : {
       "test" : {
          "properties" : {
