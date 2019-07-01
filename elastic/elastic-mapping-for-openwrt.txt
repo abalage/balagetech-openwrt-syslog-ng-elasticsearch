@@ -5,70 +5,68 @@ PUT _template/network_openwrt
     "number_of_shards": 1
   },
    "mappings" : {
-      "test" : {
-         "properties" : {
-            "nf" : {
-               "properties" : {
-                  "SESSION_LENGTH" : {
-                     "type" : "integer"
-                  }
+      "properties" : {
+         "nf" : {
+            "properties" : {
+               "SESSION_LENGTH" : {
+                  "type" : "integer"
+               },
+               "SESSION_END" : {
+                  "type" : "date"
+               },
+               "SESSION_START" : {
+                  "type" : "date"
                }
-            },
-            "nf_orig" : {
-               "properties" : {
-                  "BYTES" : {
-                     "type" : "integer"
-                  },
-                  "PKTS" : {
-                     "type" : "integer"
-                  },
-                  "SPT" : {
-                     "type" : "integer"
-                  },
-                  "SESSION_LENGTH" : {
-                     "type" : "integer"
-                  },
-                  "DPT" : {
-                     "type" : "integer"
-                  },
-                  "DST" : {
-                     "type" : "ip"
-                  },
-                  "SRC" : {
-                     "type" : "ip"
-                  }
+            }
+         },
+         "nf_orig" : {
+            "properties" : {
+               "BYTES" : {
+                  "type" : "integer"
+               },
+               "PKTS" : {
+                  "type" : "integer"
+               },
+               "SPT" : {
+                  "type" : "integer"
+               },
+               "DPT" : {
+                  "type" : "integer"
+               },
+               "DST" : {
+                  "type" : "ip"
+               },
+               "SRC" : {
+                  "type" : "ip"
                }
-            },
-            "geoip2" : {
-               "properties" : {
-                  "location2" : {
-                     "type" : "geo_point"
-                  }
+            }
+         },
+         "geoip2" : {
+            "properties" : {
+               "location2" : {
+                  "type" : "geo_point"
                }
-            },
-            "nf_reply" : {
-               "properties" : {
-                  "SESSION_LENGTH" : {
-                     "type" : "integer"
-                  },
-                  "SPT" : {
-                     "type" : "integer"
-                  },
-                  "PKTS" : {
-                     "type" : "integer"
-                  },
-                  "BYTES" : {
-                     "type" : "integer"
-                  },
-                  "SRC" : {
-                     "type" : "ip"
-                  },
-                  "DST" : {
-                     "type" : "ip"
-                  },
-                  "DPT" : {
-                     "type" : "integer"
-                  }
+            }
+         },
+         "nf_reply" : {
+            "properties" : {
+               "SPT" : {
+                  "type" : "integer"
+               },
+               "PKTS" : {
+                  "type" : "integer"
+               },
+               "BYTES" : {
+                  "type" : "integer"
+               },
+               "SRC" : {
+                  "type" : "ip"
+               },
+               "DST" : {
+                  "type" : "ip"
+               },
+               "DPT" : {
+                  "type" : "integer"
                }
             }
          }
