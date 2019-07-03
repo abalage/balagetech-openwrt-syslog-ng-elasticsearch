@@ -6,67 +6,110 @@ PUT _template/network_openwrt
   },
    "mappings" : {
       "properties" : {
-         "nf" : {
+         "host" : {
             "properties" : {
-               "SESSION_LENGTH" : {
-                  "type" : "integer"
+               "hostname" : {
+                  "type" : "keyword"
                },
-               "SESSION_END" : {
+               "name" : {
+                  "type" : "keyword"
+               },
+               "architecture" : {
+                  "type" : "keyword"
+               },
+               "ip" : {
+                  "type" : "ip"
+               },
+               "type" : {
+                  "type" : "keyword"
+               }
+            }
+         },
+         "event" : {
+            "properties" : {
+               "duration" : {
+                  "type" : "long"
+               },
+               "end" : {
                   "type" : "date"
                },
-               "SESSION_START" : {
+               "start" : {
                   "type" : "date"
                }
             }
          },
-         "nf_orig" : {
+         "inbound" : {
             "properties" : {
-               "BYTES" : {
-                  "type" : "integer"
+               "source": {
+                 "properties" : {
+                    "address" : {
+                       "type" : "keyword"
+                    },
+                    "bytes" : {
+                       "type" : "long"
+                    },
+                    "packets" : {
+                       "type" : "long"
+                    },
+                    "port" : {
+                       "type" : "long"
+                    },
+                    "ip" : {
+                       "type" : "ip"
+                    }
+                 }
                },
-               "PKTS" : {
-                  "type" : "integer"
-               },
-               "SPT" : {
-                  "type" : "integer"
-               },
-               "DPT" : {
-                  "type" : "integer"
-               },
-               "DST" : {
-                  "type" : "ip"
-               },
-               "SRC" : {
-                  "type" : "ip"
+               "destination": {
+                 "properties" : {
+                    "address" : {
+                       "type" : "keyword"
+                    },
+                    "port" : {
+                       "type" : "long"
+                    },
+                    "ip" : {
+                       "type" : "ip"
+                    }
+                 }
                }
             }
          },
-         "geoip2" : {
+         "outbound" : {
             "properties" : {
-               "location2" : {
-                  "type" : "geo_point"
-               }
-            }
-         },
-         "nf_reply" : {
-            "properties" : {
-               "SPT" : {
-                  "type" : "integer"
+               "source": {
+                 "properties" : {
+                    "address" : {
+                       "type" : "keyword"
+                    },
+                    "bytes" : {
+                       "type" : "long"
+                    },
+                    "packets" : {
+                       "type" : "long"
+                    },
+                    "port" : {
+                       "type" : "long"
+                    },
+                    "ip" : {
+                       "type" : "ip"
+                    }
+                 }
                },
-               "PKTS" : {
-                  "type" : "integer"
-               },
-               "BYTES" : {
-                  "type" : "integer"
-               },
-               "SRC" : {
-                  "type" : "ip"
-               },
-               "DST" : {
-                  "type" : "ip"
-               },
-               "DPT" : {
-                  "type" : "integer"
+               "destination": {
+                 "properties" : {
+                    "address" : {
+                       "type" : "keyword"
+                    },
+                    "port" : {
+                       "type" : "long"
+                    },
+                    "ip" : {
+                       "type" : "ip"
+                    },
+                    "geo.location" : {
+                       "type" : "geo_point"
+                    }
+                 }
                }
             }
          }
