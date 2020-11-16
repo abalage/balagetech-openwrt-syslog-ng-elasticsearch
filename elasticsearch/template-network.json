@@ -1,0 +1,495 @@
+PUT _template/network?include_type_name
+{
+  "index_patterns": [
+    "network-*"
+  ],
+  "mappings": {
+    "mapping": {
+      "_source": {},
+      "_meta": {},
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "destination": {
+          "type": "object",
+          "properties": {
+            "bytes": {
+              "type": "long",
+              "index": true,
+              "ignore_malformed": false,
+              "coerce": true,
+              "doc_values": true,
+              "store": false
+            },
+            "geo": {
+              "type": "object",
+              "properties": {
+                "city_name": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "continent_name": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "country_iso_code": {
+                  "type": "keyword",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "country_name": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "location": {
+                  "type": "geo_point",
+                  "ignore_malformed": false,
+                  "ignore_z_value": true
+                },
+                "region_iso_code": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "region_name": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                }
+              }
+            },
+            "ip": {
+              "type": "ip",
+              "doc_values": true,
+              "index": true,
+              "store": false
+            },
+            "packets": {
+              "type": "long",
+              "index": true,
+              "ignore_malformed": false,
+              "coerce": true,
+              "doc_values": true,
+              "store": false
+            },
+            "port": {
+              "type": "integer",
+              "index": true,
+              "ignore_malformed": false,
+              "coerce": true,
+              "doc_values": true,
+              "store": false
+            }
+          }
+        },
+        "ecs": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
+        },
+        "event": {
+          "type": "object",
+          "properties": {
+            "duration": {
+              "type": "long",
+              "index": true,
+              "ignore_malformed": false,
+              "coerce": true,
+              "doc_values": true,
+              "store": false
+            },
+            "dataset": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "action": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "category": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "code": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "kind": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "provider": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "module": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "original": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "type": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "hash": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "created": {
+              "type": "date"
+            },
+            "end": {
+              "type": "date"
+            },
+            "ingested": {
+              "type": "date"
+            },
+            "start": {
+              "type": "date"
+            }
+          }
+        },
+        "client" : {
+          "type": "object",
+           "properties" : {
+              "port": {
+                "type": "integer",
+                "index": true,
+                "ignore_malformed": false,
+                "coerce": true,
+                "doc_values": true,
+                "store": false
+              },
+              "ip": {
+                "type": "ip",
+                "doc_values": true,
+                "index": true,
+                "store": false
+              }
+           }
+        },
+        "dns" : {
+           "properties" : {
+              "id" : {
+                 "type" : "keyword"
+              },
+              "question.name" : {
+                 "type" : "keyword"
+              },
+              "question.type" : {
+                 "type" : "keyword"
+              },
+              "question.registered_domain": {
+                  "type": "keyword",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+              },
+              "question.subdomain" : {
+                 "type" : "keyword"
+              },
+              "question.top_level_domain" : {
+                 "type" : "keyword"
+              }
+            }
+        },
+        "host": {
+          "type": "object",
+          "properties": {
+            "hostname": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "ip": {
+              "type": "ip",
+              "doc_values": true,
+              "index": true,
+              "store": false
+            },
+            "name": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
+        },
+        "network": {
+          "type": "object",
+          "properties": {
+            "bytes": {
+              "type": "long",
+              "index": true,
+              "ignore_malformed": false,
+              "coerce": true,
+              "doc_values": true,
+              "store": false
+            },
+            "community_id": {
+              "type": "keyword",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "direction": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "name": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "packets": {
+              "type": "long",
+              "index": true,
+              "ignore_malformed": false,
+              "coerce": true,
+              "doc_values": true,
+              "store": false
+            },
+            "protocol": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "transport": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "type": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "bytes": {
+              "type": "long",
+              "index": true,
+              "ignore_malformed": false,
+              "coerce": true,
+              "doc_values": true,
+              "store": false
+            },
+            "geo": {
+              "type": "object",
+              "properties": {
+                "city_name": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "continent_name": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "country_iso_code": {
+                  "type": "keyword",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "country_name": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "location": {
+                  "type": "geo_point",
+                  "ignore_malformed": false,
+                  "ignore_z_value": true
+                },
+                "region_iso_code": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "region_name": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                }
+              }
+            },
+            "ip": {
+              "type": "ip",
+              "doc_values": true,
+              "index": true,
+              "store": false
+            },
+            "packets": {
+              "type": "long",
+              "index": true,
+              "ignore_malformed": false,
+              "coerce": true,
+              "doc_values": true,
+              "store": false
+            },
+            "port": {
+              "type": "integer",
+              "index": true,
+              "ignore_malformed": false,
+              "coerce": true,
+              "doc_values": true,
+              "store": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

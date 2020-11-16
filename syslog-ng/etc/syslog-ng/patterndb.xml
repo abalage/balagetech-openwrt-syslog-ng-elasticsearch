@@ -1,0 +1,18 @@
+<!-- https://superuser.com/questions/1018927/what-is-found-in-fail2ban-log-file -->
+<?xml version='1.0' encoding='UTF-8'?>
+<patterndb version="4" pub_date="2018-06-05">
+  <ruleset id='c16cd58c-37d3-42c1-b7ea-50ca2e24f864' name='fail2ban-server'>
+    <pattern>fail2ban-server</pattern>
+    <rules>
+      <rule class='violation' id='c16cd58c-37d3-42c1-b7ea-50ca2e24f864' provider='balage'>
+      <description></description>
+        <patterns>
+          <pattern>fail2ban.filter @QSTRING:pid:[]@: INFO @QSTRING:jail:[]@ @ESTRING:action: @@IPvANY:ip@</pattern>
+<!--          <pattern>fail2ban.actions @QSTRING:pid:[]@: NOTICE @QSTRING:jail:[]@ Restore Ban @IPvANY:ip@</pattern> -->
+          <pattern>fail2ban.actions @QSTRING:pid:[]@: NOTICE @QSTRING:jail:[]@ @ESTRING:action: @@IPvANY:ip@</pattern>
+        </patterns>
+      </rule>
+
+    </rules>
+  </ruleset>
+</patterndb>
