@@ -1,29 +1,44 @@
 # balagetech-openwrt-syslog-ng-elasticsearch
 Monitoring home network traffic with OpenWRT, Syslog-ng and Elasticsearch
 
-This repo contains:
-* A complete configuration for syslog-ng to logging OpenWRT connection tracking events to Elasticsearch by using syslog-ng
-  * It enriches logs with GeoIP, Reverse DNS and session lenghth metadata
-* A text file describing an explicit mapping for some attributes of the logs.
+This repo contains a complete configuration for monitoring home network with OpenWRT and syslog-ng and Elasticsearch Security.
 
-Warning! For license issues the python parser referenced in the blog post is not included in this repo.
-
-Further information could be found in the website referred in repo details.
+The following components are implemented:
+ - connection tracking events by ulogd2
+ - DNS logs either by dnsmasq or unbound (preferred)
+ - fail2ban events added as alerts
 
 ###Contents:
 ```
-/
+
 ├── LICENSE
 ├── README.md
-├── elastic
-│   └── elastic-mapping-for-openwrt.txt     <- data type mappings for indexes
-└── etc
-    ├── ulogd.conf                          <- ulogd configuration for OpenWRT 18.06.x
-    ├── apparmor.d
-    │   └── local
-    │       └── sbin.syslog-ng              <- workaround for GitHub issue https://github.com/balabit/syslog-ng/issues/2625
-    └── syslog-ng
-        └── conf.d
-            ├── common.conf
-            └── network.conf
+├── elasticsearch
+│   └── template-network.json
+├── openwrt
+│   └── etc
+│       └── ulogd.conf
+└── syslog-ng
+    └── etc
+        ├── GeoIP.conf
+        ├── apparmor.d
+        │   └── local
+        │       └── sbin.syslog-ng
+        ├── fail2ban
+        │   └── fail2ban.conf
+        ├── syslog-ng
+        │   ├── conf.d
+        │   │   ├── common.conf
+        │   │   ├── network-dnsmasq.conf
+        │   │   ├── network-fail2ban.conf
+        │   │   ├── network-ulogd2.conf
+        │   │   ├── network-unbound.conf
+        │   │   └── network.conf
+        │   ├── patterndb.xml
+        │   └── syslog-ng.conf
+        └── unbound
+            └── unbound.conf
 ```
+
+Further information could be found in the website referred in repo details.
+
