@@ -10,34 +10,45 @@ The following components are implemented:
 
 ###Contents:
 ```
-
+.
 ├── LICENSE
 ├── README.md
 ├── elasticsearch
 │   └── template-network.json
 ├── openwrt
 │   └── etc
+│       ├── config
+│       │   ├── dhcp
+│       │   └── unbound
 │       └── ulogd.conf
 └── syslog-ng
     └── etc
         ├── GeoIP.conf
         ├── apparmor.d
         │   └── local
-        │       └── sbin.syslog-ng
         ├── fail2ban
         │   └── fail2ban.conf
         ├── syslog-ng
         │   ├── conf.d
-        │   │   ├── common.conf
-        │   │   ├── network-dnsmasq.conf
-        │   │   ├── network-fail2ban.conf
-        │   │   ├── network-ulogd2.conf
-        │   │   ├── network-unbound.conf
-        │   │   └── network.conf
         │   ├── patterndb.xml
         │   └── syslog-ng.conf
         └── unbound
             └── unbound.conf
+```
+
+## Server extra for unbound on OpenWRT
+Add this to "Services -> Recursive DNS -> Files -> Edit: Server"
+```
+
+# Log to syslog(3) if yes. The log facility LOG_DAEMON is used to
+# log to, with identity "unbound". If yes, it overrides the logfile.
+use-syslog: yes
+
+# print UTC timestamp in ascii to logfile, default is epoch in seconds.
+log-time-ascii: yes
+
+# print one line with time, IP, name, type, class for every query.
+log-queries: yes
 ```
 
 Further information could be found in the website referred in repo details.
