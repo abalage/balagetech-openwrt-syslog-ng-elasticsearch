@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  db:
+    image: sng:latest
+    restart: always
+    hostname: localhost/sng:latest
+    ports:
+      - "6514:6514"
+      - "514:514"
+   environment:
+     - FOO=bar
+    volumes:
+      - sng-etc:/etc/syslog-ng
+      - sng-log:/var/log
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          cpus: '0.75'
+          memory: 256M
+
+volumes:
+  sng-etc:
+  sng-log:

@@ -23,4 +23,5 @@ RUN /var/lib/syslog-ng/python-venv/bin/python3 -m pip install publicsuffixlist
 
 VOLUME /var/log
 
+# TODO fetch
 # /etc/syslog-ng/GeoLite2-City.mmdb
