@@ -7,12 +7,13 @@ by using publicsuffixlist from Mozilla
 """
 
 import traceback
+import syslogng
 from publicsuffixlist import PublicSuffixList
 
 with open("/usr/share/publicsuffix/public_suffix_list.dat", "rb") as f:
     psl = PublicSuffixList(f)
 
-class DNSSuffixResolver(object):
+class DNSSuffixResolver(syslogng.LogParser):
     def init(self, options):
         self.domain = options["domain"]
         self.tld = options["tld"]

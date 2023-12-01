@@ -15,6 +15,12 @@ ENV NETWORK_NAME="Balage Home"
 
 ENV PYTHONPATH=$PYTHONPATH:/etc/syslog-ng/python/
 
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt update && apt install --no-install-recommends -y python3-publicsuffix2 && rm -rf /var/lib/apt/lists/*
+
+RUN syslog-ng-update-virtualenv -y
+RUN /var/lib/syslog-ng/python-venv/bin/python3 -m pip install publicsuffixlist
+
 VOLUME /var/log
 
 # /etc/syslog-ng/GeoLite2-City.mmdb
