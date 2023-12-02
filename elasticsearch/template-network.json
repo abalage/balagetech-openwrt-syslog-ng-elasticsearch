@@ -1,12 +1,10 @@
-PUT _template/network?include_type_name
+PUT _index_template/network
 {
   "index_patterns": [
     "network-*"
   ],
-  "mappings": {
-    "mapping": {
-      "_source": {},
-      "_meta": {},
+  "template": {
+    "mappings": {
       "properties": {
         "@timestamp": {
           "type": "date"
@@ -241,7 +239,7 @@ PUT _template/network?include_type_name
         },
         "client" : {
           "type": "object",
-           "properties" : {
+            "properties" : {
               "port": {
                 "type": "integer",
                 "index": true,
@@ -256,18 +254,18 @@ PUT _template/network?include_type_name
                 "index": true,
                 "store": false
               }
-           }
+            }
         },
         "dns" : {
-           "properties" : {
+            "properties" : {
               "id" : {
-                 "type" : "keyword"
+                  "type" : "keyword"
               },
               "question.name" : {
-                 "type" : "keyword"
+                  "type" : "keyword"
               },
               "question.type" : {
-                 "type" : "keyword"
+                  "type" : "keyword"
               },
               "question.registered_domain": {
                   "type": "keyword",
@@ -279,10 +277,10 @@ PUT _template/network?include_type_name
                   }
               },
               "question.subdomain" : {
-                 "type" : "keyword"
+                  "type" : "keyword"
               },
               "question.top_level_domain" : {
-                 "type" : "keyword"
+                  "type" : "keyword"
               }
             }
         },
