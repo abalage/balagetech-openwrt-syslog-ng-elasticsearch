@@ -2,15 +2,36 @@ version: '3'
 
 services:
 
-  db:
+  init-mmdb:
+    image: sng:latest
+    volumes:
+      - sng-etc:/etc/syslog-ng
+    user: "0"
+    entrypoint: >
+      bash -c 'wget https://github.com/P3TERX/GeoLite.mmdb/releases/download/2023.12.01/GeoLite2-City.mmdb -O /etc/syslog-ng/GeoLite2-City.mmdb'
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /etc/syslog-ng/GeoLite2-City.mmdb ]"]
+      interval: 1s
+      timeout: 5s
+      retries: 120
+
+  syslog-ng:
+    build:
+      context: ./
+      dockerfile: Dockerfile
     image: sng:latest
     restart: always
-    hostname: localhost/sng:latest
+    hostname: syslog-ng-openwrt-elk
     ports:
       - "6514:6514"
       - "514:514"
-   environment:
-     - FOO=bar
+    environment:
+      - REMOTE_HOST="es01"
+      - REMOTE_PORT="9200"
+      - REMOTE_USER="elastic"
+      - REMOTE_PASS="changeme"
+      - DNS_SERVER="1.2.3.4"
+      - NETWORK_NAME="Example Home"
     volumes:
       - sng-etc:/etc/syslog-ng
       - sng-log:/var/log
@@ -21,7 +42,15 @@ services:
         reservations:
           cpus: '0.75'
           memory: 256M
+    depends_on:
+      init-mmdb:
+        condition: service_healthy
 
 volumes:
   sng-etc:
   sng-log:
+
+networks:
+  default:
+    name: elastic
+    external: false
